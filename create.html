@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <base target="_top">
+
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css"
+    integrity="sha384-JcKb8q3iqJ61gNV9KGb8thSsNjpSL0n8PARn9HuZOnIxN0hoP+VmmDGMN5t9UJ0Z" crossorigin="anonymous">
+
+  <style>
+    body {
+      background: #eee;
+    }
+
+    .frame {
+      box-shadow: 10px 10px 15px rgb(193, 182, 182), -6px -6px 15px #eee;
+      padding: 20px;
+      max-width: 480px;
+      margin: 40px auto;
+      margin-top: 10px;
+      border-radius: 7px;
+      background: white;
+    }
+
+    button {
+      text-transform: uppercase;
+      transition: transform 80ms ease-in;
+      border-radius: 7px;
+    }
+
+    button:active {
+      transform: scale(0.95);
+      color: white
+    }
+
+    .btn.focus,
+    .btn:focus {
+      outline: 0;
+      box-shadow: none !important;
+      color: white;
+    }
+
+    .btn-info:hover {
+      background-color: gold;
+      color: white;
+      border-color: gold;
+    }
+
+    .btn-info {
+      color: white;
+    }
+
+    .boxTitle {
+      border: 1px solid rgba(0, 0, 0, 0.2);
+      border-radius: 40px 0px 40px 0px;
+      padding: 1.5rem;
+      margin-left: 10px;
+      margin-right: 10px;
+      /* border-radius: 13px;         */
+      margin: auto;
+      width: 100%;
+    }
+
+    .box {
+      border: 1px solid rgba(0, 0, 0, 0.2);
+      padding: 1.5rem;
+      margin-left: 10px;
+      margin-right: 10px;
+      border-radius: 13px;
+      margin: auto;
+      width: 100%;
+    }
+
+    .inp {
+      border: none;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+      border-radius: 0px;
+      padding: 5px 10px;
+      outline: none;
+    }
+
+    [placeholder]:focus::-webkit-input-placeholder {
+      transition: text-indent 0.4s 0.4s ease;
+      text-indent: -100%;
+      opacity: 1;
+    }
+
+    .inp.focus,
+    .inp:focus {
+      outline: 0;
+      box-shadow: none !important;
+      /* color: green; */
+      border-bottom: 1px solid rgba(0, 0, 0, 0.2);
+    }
+  </style>
+
+</head>
+
+<body>
+
+  <div class="container">
+    <div class="row frame">
+
+      <div class="text-center mb-4 boxTitle" style="color: white; background-color: #17A2B8">
+        <h3>Form</h3>
+      </div>
+
+      <!-- create form element here -->
+
+      <div class="form-group mb-4 box">
+        <input type="text" class="form-control inp mb-3" id="input1" placeholder="Your Customer Code Generated Automatically!!!" autocomplete="off" disabled="display">
+      </div>
+
+      <div class="form-group mb-4 box">
+        <input type="text" class="form-control inp mb-3" id="input2" placeholder="What's your Emp Id?" autocomplete="off">
+      </div>
+
+      <div class="form-group mb-4 box">
+        <input type="text" class="form-control inp mb-3" id="input3" placeholder="What's your Customer Name?" autocomplete="off">
+      </div>
+
+      <div class="form-group mb-4 box">
+        <input type="email" class="form-control inp mb-3" id="input4" placeholder="What's your Email Id?" autocomplete="off">
+      </div>
+
+      <div class="form-group mb-4 box">
+        <input type="tel" class="form-control inp mb-3" id="input5" placeholder="What's your Mobile Number1?" autocomplete="off">
+      </div>
+
+      <div class="form-group mb-4 box">
+        <input type="tel" class="form-control inp mb-3" id="input6" placeholder="What's your Mobile Number2?" autocomplete="off">
+      </div>
+
+      <div class="form-group mb-4 box">
+        <input type="tel" class="form-control inp mb-3" id="input7" placeholder="What's your Mobile Number3?" autocomplete="off">
+      </div>
+
+      <div class="form-group mb-4 box">
+        <input type="tel" class="form-control inp mb-3" id="input8" placeholder="What's your Mobile Number4?" autocomplete="off">
+      </div>
+
+      <div class="form-group mb-4 box">
+        <input type="text" class="form-control inp mb-3" id="input9" placeholder="What's your Street Address?" autocomplete="off">
+      </div>
+
+      <div class="form-group mb-4 box">
+        <input type="text" class="form-control inp mb-3" id="input10" placeholder="What's your City?" autocomplete="off">
+      </div>
+
+      <div class="form-group mb-4 box">
+        <label for="exampleFormControlSelect1">State</label>
+        <select class="form-control" id="input11" name="input11">
+          <option>Select State</option>
+          <option>Andhra Pradesh(Amaravati)</option>
+          <option>Arunachal Pradesh(Itanagar)</option>
+          <option>Assam(Dispur)</option>
+          <option>Bihar(Patna)</option>
+          <option>Chhattisgarh(Raipur)</option>
+          <option>Goa(Panaji)</option>
+          <option>Gujarat(Gandhinagar)</option>
+          <option>Haryana(Chandigarh)</option>
+          <option>Himachal Pradesh(Shimla)</option>
+          <option>Jharkhand(Ranchi)</option>
+          <option>Karnataka(Bangalore)</option>
+          <option>Kerala(Thiruvananthapuram)</option>
+          <option>Madhya Pradesh(Bhopal)</option>
+          <option>Maharashtra(Mumbai)</option>
+          <option>Manipur(Imphal)</option>
+          <option>Meghalaya(Shillong)</option>
+          <option>Mizoram(Aizawl)</option>
+          <option>Nagaland(Kohima)</option>
+          <option>Odisha(Bhubaneshwar)</option>
+          <option>Punjab(Chandigarh)</option>
+          <option>Rajasthan(Jaipur)</option>
+          <option>Sikkim(Gangtok)</option>
+          <option>Tamil Nadu(Chennai)</option>
+          <option>Telangana(Hyderabad)</option>
+          <option>Tripura(Agartala)</option>
+          <option>Uttarakhand(Dehradun)</option>
+          <option>Uttar Pradesh(Lucknow)</option>
+          <option>West Bengal(Kolkata)</option>
+        </select>
+      </div>
+
+      <div class="form-group mb-4 box">
+        <input type="number" class="form-control inp mb-3" id="input12" placeholder="What's your Postal/Zip Code?" autocomplete="off">
+      </div>
+
+      <div class="text-center mb-4 boxTitle" style="color: white; background-color: #17A2B8">
+        <h4>Documents</h4>
+      </div>
+      <div class="form-group mb-4 box">
+        <div class="mb-3" id="myForm">
+          <label for="myFile" class="form-label">Aadhar Card(Upload)</label>
+          <input class="form-control-file" type="file" id="myFile" name="myFile" placeholder="Aadhar">
+        </div>
+
+        <center>
+          <div>
+            <p>
+              <img class="form-control-file mt-4" style="max-width: 300px; margin: 40px auto; display: none; border: 0px solid #555;" src="" id="img" alt="from phone">
+            </p>
+          </div>
+        </center>
+      </div>
+
+      <div class="form-group mb-4 box">
+        <div class="mb-3" id="myForm2">
+          <label for="myFile2" class="form-label">Pan Card(Upload)</label>
+          <input class="form-control-file" type="file" id="myFile2" name="myFile" placeholder="pan">
+        </div>
+
+        <center>
+          <div>
+            <p>
+              <img class="form-control-file mt-4" style="max-width: 300px; margin: 40px auto; display: none; border: 0px solid #555;" src="" id="img2" alt="from phone">
+            </p>
+          </div>
+        </center>
+
+      </div>
+
+      <div class="form-group mb-4 box">
+        <div class="mb-3" id="myForm3">
+          <label for="myFile3" class="form-label">Other Documents(Upload)</label>
+          <input class="form-control-file" type="file" id="myFile3" name="myFile" placeholder="others">
+        </div>
+
+        <center>
+          <div>
+            <p>
+              <img class="form-control-file mt-4" style="max-width: 300px; margin: 40px auto; display: none; border: 0px solid #555;" src="" id="img3" alt="from phone">
+            </p>
+          </div>
+        </center>
+      </div>
+
+      <!-- create form element until here -->
+
+      <div class="col text-center mb-4">
+        <button type="button" id="submitButton" class="btn btn-info">SUBMIT</button>
+      </div>
+      <div class="col text-center mb-4">
+        <p><a href='<?= url ?>'>Back to home page</a></p>
+      </div>
+    </div>
+  </div>
+
+  <script src="https://code.jquery.com/jquery-3.5.1.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.1/dist/umd/popper.min.js"
+    integrity="sha384-SR1sx49pcuLnqZUnnPwx6FCym0wLsk5JZuNx2bPPENzswTNFaQU1RDvt3wT4gWFG" crossorigin="anonymous">
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-beta3/dist/js/bootstrap.min.js"
+    integrity="sha384-j0CNLUeiqtyaRmlzUHCPZ+Gy5fQu0dQ6eZ/xAww941Ai1SxSY+0EQqNXNE6DZiVc" crossorigin="anonymous">
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@10"></script>
+
+  <script>
+    let uploadFile ={}
+    $('input[type="file"]').on('change',function(){
+      let files = []
+      for(var i=0; i<$(this)[0].files.length; i++){
+         files.push($(this)[0].files[i])
+      }
+      files.forEach((file,i)=>{
+        let reader = new FileReader()
+        reader.onloadend = (e)=>{
+          uploadFile[$(this).attr('id')+(i+1)]={
+            data:e.target.result.split(',')[1],
+            name:file.name,
+            type:file.type
+          }
+        }
+        reader.readAsDataURL(file)
+       })
+       })  
+ 
+  document.addEventListener('DOMContentLoaded', (ev) =>{
+
+    showFileIcon('myFile','img')
+    showFileIcon('myFile2','img2')
+    showFileIcon('myFile3','img3')
+
+  });
+
+  function showFileIcon(fileID, imgID){
+    let input = document.getElementById(fileID);
+    input.addEventListener('change', (ev) =>{
+      console.dir( input.files[0] );
+      let img = document.getElementById(imgID);
+      img.style.display = "block";
+      img.src = input.files[0].type.indexOf("image/") > -1? window.URL.createObjectURL(input.files[0]):
+                input.files[0].type.indexOf("/pdf") > -1? "http://uapminovasi.com/wp-content/uploads/2018/09/pdf-logo-15.jpg":
+                input.files[0].type.indexOf(".sheet") > -1? "https://gadoin.com/wp-content/uploads/2021/05/excel-logo-0.jpg":
+                input.files[0].type.indexOf(".document") > -1?
+                "https://logos-world.net/wp-content/uploads/2020/03/Microsoft-Word-Logo-2013-2019.png":
+                "https://iconape.com/wp-content/png_logo_vector/document.png";
+    })
+  };
+
+
+  document.querySelector(".btn").addEventListener("click", submitData);
+
+  function submitData(){
+    var input1 = document.getElementById("input1");
+    var input2 = document.getElementById("input2");
+    var input3 = document.getElementById("input3");
+    var input4 = document.getElementById("input4");
+    var input5 = document.getElementById("input5");
+    var input6 = document.getElementById("input6");
+    var input7 = document.getElementById("input7");
+    var input8 = document.getElementById("input8");
+    var input9 = document.getElementById("input9");
+    var input10 = document.getElementById("input10");
+    var input11 = document.getElementById("input11");
+    var input12 = document.getElementById("input12");
+    let upload1 = document.getElementById('myFile');
+    let upload2 = document.getElementById('myFile2');
+    let upload3 = document.getElementById('myFile3');
+
+    let img = document.getElementById('img');
+    let img2 = document.getElementById('img2');
+    let img3 = document.getElementById('img3');
+    let button = document.getElementById('submitButton');
+
+    let obj = {
+      input1: input1.value,
+      input2: input2.value,
+      input3: input3.value,
+      input4: input4.value,
+      input5: input5.value,
+      input6: input6.value,
+      input7: input7.value,
+      input8: input8.value,
+      input9: input9.value,
+      input10: input10.value,
+      input11: input11.value,
+      input12: input12.value,
+      uploadFile: uploadFile
+    }
+    
+    if(input2.value == ""||input3.value == ""||input4.value == ""||input5.value == ""||input6.value == ""||input7.value == ""||input8.value == ""||input9.value == ""||input10.value == ""||input11.value == ""||input12.value == "" || upload1.value == "" || upload2.value == "" || upload3.value==""){
+        Swal.fire({title:"", text:'Please fill all the fields!', icon: 'warning'})
+    }else{
+        button.innerHTML = "Loading...";
+        google.script.run
+        .withSuccessHandler(() => {
+          input1.value = "";
+          input2.value = "";
+          input3.value = "";
+          input4.value = "";
+          input5.value = "";
+          input6.value = "";
+          input7.value = "";
+          input8.value = "";
+          input9.value = "";
+          input10.value = "";
+          input11.value = "";
+          input12.value = "";
+          upload1.value = "";
+          img.src = "";
+          img.style.display = "none";
+
+          upload2.value = "";
+          img2.src = "";
+          img2.style.display = "none";
+
+          upload3.value = "";
+          img3.src = "";
+          img3.style.display = "none";
+          button.innerHTML = "SUBMIT";
+          uploadFile = {};
+          Swal.fire({title:"", text:'Data sent!', icon:'success', timer: 2500, showConfirmButton:false});     
+        })
+        .saveData(obj);      
+    }
+  };
+
+  </script>
+</body>
+
+</html>

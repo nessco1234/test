@@ -1,0 +1,247 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <base target="_top">
+  <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+    integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous">
+  </script>
+  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.bundle.min.js"
+    integrity="sha384-xrRywqdh3PHs8keKZN+8zzc5TX0GRTLCcmivcbNJWm2rs5C8PRhcEn3czEjhAO9o" crossorigin="anonymous">
+  </script>
+  <script>
+    // Prevent forms from submitting.
+  function preventFormSubmit() {
+    var forms = document.querySelectorAll('form');
+    for (var i = 0; i < forms.length; i++) {
+      forms[i].addEventListener('submit', function(event) {
+      event.preventDefault();
+      });
+    }
+  }
+  window.addEventListener("load", functionInit, true); 
+   
+  //INITIALIZE FUNCTIONS ONLOAD
+  function functionInit(){  
+    preventFormSubmit();
+    getLastTenRows();
+  };      
+   
+  //HANDLE FORM SUBMISSION
+  function handleFormSubmit(formObject) {
+    google.script.run.withSuccessHandler(createTable).processForm(formObject);
+    document.getElementById("myForm").reset();
+  }
+   
+  //GET LAST 10 ROWS
+  function getLastTenRows (){
+   google.script.run.withSuccessHandler(createTable).getLastTenRows();
+  }
+   
+   
+  //GET ALL DATA
+  function getAllData(){
+    //document.getElementById('dataTable').innerHTML = "";
+    google.script.run.withSuccessHandler(createTable).getAllData();
+  }
+   
+   
+  //CREATE THE DATA TABLE
+  function createTable(dataArray) {
+    if(dataArray){
+      var result = "<table class='table table-sm' style='font-size:0.8em'>"+
+                   "<thead style='white-space: nowrap'>"+
+                     "<tr>"+                               //Change table headings to match witht he Google Sheet
+                      "<th scope='col'>Delete</th>"+
+                      "<th scope='col'>Edit</th>"+
+                      "<th scope='col'>CustomerCode</th>"+
+                      "<th scope='col'>EmpID</th>"+
+                      "<th scope='col'>CustomerName</th>"+
+                      "<th scope='col'>Email</th>"+
+                      "<th scope='col'>Phone1</th>"+
+                      "<th scope='col'>Phone2</th>"+
+                      "<th scope='col'>Phone3</th>"+
+                      "<th scope='col'>Phone4</th>"+
+                      "<th scope='col'>StreetAddress</th>"+
+                      "<th scope='col'>City</th>"+
+                      "<th scope='col'>State</th>"+
+                      "<th scope='col'>PostalCode</th>"
+                    "</tr>"+
+                  "</thead>";
+      for(var i=0; i<dataArray.length; i++) {
+          result += "<tr>";
+          result += "<td><button type='button' class='btn btn-danger btn-xs deleteBtn' onclick='deleteData(this);'>Delete</button></td>";
+          result += "<td><button type='button' class='btn btn-warning btn-xs editBtn' onclick='editData(this);'>Edit</button></td>";
+          for(var j=0; j<dataArray[i].length; j++){
+              result += "<td>"+dataArray[i][j]+"</td>";
+          }
+          result += "</tr>";
+      }
+      result += "</table>";
+      var div = document.getElementById('dataTable');
+      div.innerHTML = result;
+      document.getElementById("message").innerHTML = "";
+    }else{
+      var div = document.getElementById('dataTable');
+      div.innerHTML = "Data not found!";
+    }
+  }
+ 
+  //DELETE DATA
+  function deleteData(el) {
+    var result = confirm("Want to delete?");
+    if (result) {
+      var recordId = el.parentNode.parentNode.cells[2].innerHTML;
+      google.script.run.withSuccessHandler(createTable).deleteData(recordId);
+    }
+  }
+   
+   
+  //EDIT DATA
+  function editData(el){
+    var recordId = el.parentNode.parentNode.cells[2].innerHTML; //https://stackoverflow.com/a/32377357/2391195
+    google.script.run.withSuccessHandler(populateForm).getRecordById(recordId);
+  }
+ 
+  //POPULATE FORM
+  function populateForm(records){
+    document.getElementById('id').value = records[0][0];
+    document.getElementById('empid').value = records[0][1];
+    document.getElementById('cname').value = records[0][2];
+    document.getElementById('email').value = records[0][3];
+    document.getElementById('phone1').value = records[0][4];
+    document.getElementById('phone2').value = records[0][5];
+    document.getElementById("phone3").value = records[0][6];
+    document.getElementById("phone4").value = records[0][7];
+    document.getElementById("street").value = records[0][8];
+    document.getElementById("city").value = records[0][9];
+    document.getElementById("state").value = records[0][10];
+    document.getElementById("zip").value = records[0][11];
+
+    document.getElementById("message").innerHTML = "<div class='alert alert-warning' role='alert'>Update Record [ID: "+records[0][0]+"]</div>";
+  }
+   
+  //RETRIVE DATA FROM GOOGLE SHEET FOR COUNTRY DROPDOWN
+  function createCountryDropdown() {
+      //SUBMIT YOUR DATA RANGE FOR DROPDOWN AS THE PARAMETER
+      google.script.run.withSuccessHandler(countryDropDown).getDropdownList("state!A1:A30");
+  }
+   
+  //POPULATE COUNTRY DROPDOWNS
+  function countryDropDown(values) { //Ref: https://stackoverflow.com/a/53771955/2391195
+    var list = document.getElementById('state');   
+    for (var i = 0; i < values.length; i++) {
+      var option = document.createElement("option");
+      option.value = values[i];
+      option.text = values[i];
+      list.appendChild(option);
+    }
+  }
+  </script>
+
+  <style>
+    .btn-group-xs>.btn,
+    .btn-xs {
+      padding: .25rem .4rem;
+      font-size: .875rem;
+      line-height: .5;
+      border-radius: .2rem;
+    }
+  </style>
+
+</head>
+
+<body onload="createCountryDropdown()">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-6">
+        <!-- ## The html code of the form goes here -->
+        <!-- ## This is included in the Index.html page using "include('Form')" function -->
+
+        <form id="myForm" class="p-2 border border-light rounded bg-light" onsubmit="handleFormSubmit(this)">
+          <!-- Call JavaScript function "handleFormSubmit" -->
+          <p class="h4 mb-4 text-center">Edit Form</p>
+          <div id="message"></div>
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="id" >Emp ID</label>
+              <input type="text" class="form-control" id="id" name="id" placeholder="Customer Code" readonly="readonly">
+            </div>
+            <div class="form-group col-md-6">
+              <label for="empid">Customer Code</label>
+              <input type="text" class="form-control" id="empid" name="empid" placeholder="Employee Id" readonly="readonly">
+            </div>
+          </div>
+          <div class="form-group ">
+            <label for="cname">Customer Name</label>
+            <input type="text" class="form-control" id="cname" name="cname" placeholder="Enter the name" required>
+          </div>
+
+          <div class="form-group">
+            <label for="email">Email</label>
+            <input type="email" class="form-control" id="email" name="email" placeholder="Email" required>
+          </div>
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="phone1">Phone Number1</label>
+              <input type="tel" class="form-control" id="phone1" name="phone1" placeholder="Phone Number1" required>
+            </div>
+            <div class="form-group col-md-6">
+              <label for="phone2">Phone Number2</label>
+              <input type="tel" class="form-control" id="phone2" name="phone2" placeholder="Phone Number2" required>
+            </div>
+            <div class="form-group col-md-6">
+              <label for="phone3">Phone Number3</label>
+              <input type="tel" class="form-control" id="phone3" name="phone3" placeholder="Phone Number3" required>
+            </div>
+            <div class="form-group col-md-6">
+              <label for="phone4">Phone Number4</label>
+              <input type="tel" class="form-control" id="phone4" name="phone4" placeholder="Phone Number4" required>
+            </div>
+            <div class="form-group col-md-6">
+              <label for="street">Street Address</label>
+              <input type="text" class="form-control" id="street" name="street" placeholder="Street Address" required>
+            </div>
+            <div class="form-group col-md-6">
+              <label for="street">City</label>
+              <input type="text" class="form-control" id="city" name="city" placeholder="City" required>
+            </div>
+            <div class="form-group col-md-6">
+              <label for="exampleFormControlSelect1">State</label>
+              <select class="form-control" id="state" name="state" required>
+          <option> Select State</option>
+        </select>
+            </div>
+            <div class="form-group col-md-6">
+              <label for="zip">Postal/Zip Code</label>
+              <input type="number" class="form-control" id="zip" name="zip" placeholder="Postal/Zip Code" required>
+            </div>
+          </div>
+
+          <button type="submit" class="btn btn-primary">Submit</button>
+          <input class="btn btn-secondary" type="reset" value="Reset">
+          <div>
+            <p><a href='<?= url ?>'>Back to home page</a></p>
+          </div>
+        </form>
+        <br><br>
+        <div id="output"></div>
+      </div>
+      <div class="col-lg-6">
+
+        <p class="h4 mb-4 text-center">Database</p>
+
+        <div id="dataTable" class="table-responsive">
+          <!-- The Data Table is inserted here by JavaScript -->
+        </div>
+        <br>
+        <button type="button" class="btn btn-success btn-sm" onclick="getAllData()">Get ALL Data</button>
+
+      </div>
+    </div>
+  </div>
+</body>
+
+</html>

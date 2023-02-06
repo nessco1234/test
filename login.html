@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <base target="_top">
+  <script>
+  function checkIfLoggedIn() {
+  var username = localStorage.getItem("username");
+  var password = localStorage.getItem("token");
+  if (username && password) {
+    document.write("<?=home?>");
+  }
+}
+  
+  function LoginUser() {
+    var username = document.getElementById("username").value;
+    var password = document.getElementById("password").value;
+
+    if(username=='' && password==''){
+      alert("enter the username and passwoord")
+    }
+    else{
+    google.script.run.withSuccessHandler(function(output) {
+      if(output.status === true) {
+        localStorage.setItem("username", username);
+        localStorage.setItem("token", output.token);
+        //document.write("Login Successfully");
+        alert("Login successfully");
+        document.write(" <br><input type='button' value='Logout' onclick='LogoutUser()' style='float: center;padding-top: 2px;padding-bottom: 1px;padding-left: 6px;padding-right: 6px;font-size: 2.0em;font-weight:bold;'/>");
+        //alert("Login successfully");
+        //window.location.href="home";
+      } 
+      
+      else{
+        document.getElementById("errorMessage").innerHTML = "Invalid data";     
+      }  
+    }).checkLogin(username, password);
+    }
+  }
+  function LogoutUser(){
+    alert("CLick ok for Logout");
+    localStorage.removeItem("username");
+    localStorage.removeItem("token");
+    //window.location.href = "index.html";
+   // document.write("LogOut Successfully");
+  }
+
+  </script>
+  <style>
+    /*page1*/
+    .page1_class1-off {
+      display: none;
+    }
+
+    /*page2*/
+    .page2_class1 {
+      display: none;
+
+    }
+
+    .page2_id1-off {
+      display: none;
+    }
+
+    input[type=text]:hover {
+      border-bottom: 4px solid blue;
+    }
+
+    input[type=number]:hover {
+      border-bottom: 4px solid blue;
+    }
+
+    input[type=password]:hover {
+      border-bottom: 4px solid blue;
+    }
+    .user {
+      display: inline-block;
+      width: 75px;
+      height: 75px;
+      border: 8px solid black;
+      border-radius: 50%;
+      position: relative;
+      overflow: hidden;
+      box-sizing: border-box;
+    }
+    /*the head*/
+    .user::before {
+      content: '';
+      display: inline-block;
+      width: 24px;
+      height: 24px;
+      background: black;
+      border-radius: 50%;
+      position: absolute;
+      left: calc(50% - 11px);
+      top: 10px;
+    }
+
+    /*the body*/
+    .user::after {
+      content: '';
+      display: inline-block;
+      width: 50px;
+      height: 40px;
+      background: black;
+      border-radius: 50%;
+      position: absolute;
+      left: calc(50% - 24px);
+      top: 39px;
+    }
+  </style>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+</head>
+<body onload="checkIfLoggedIn()">
+  <br><br>
+  <center>
+    <!--page1-->
+    <div class="page1_class1" id="page1_id1"
+      style="background:none;border:4px solid gray;border-radius: 20px;width: 350px;padding-top: 20px;padding-bottom: 40px;padding-left: 40px;padding-right: 40px;">
+      <h1>Login Form</h1>
+      <br>
+      <input type="text" id="username" placeholder="Username" style="border-top: none;border-right: none;border-left: none;outline: none; text-align: center;font-size:1.5em ;width: 80%;font-weight:bold;"/><br>
+      <br><br>
+
+      <input type="password" id="password" placeholder="Password" style="border-top: none;border-right: none;border-left: none;outline: none; text-align: center;font-size:1.5em ;width: 80%;font-weight:bold;"/><br><br>
+
+      <br><span id="errorMessage" style="color: red" ></span><br>
+
+      <input type="submit" value="Login" onclick="LoginUser()" id="btn" style="float: center;padding-top: 2px;padding-bottom: 1px;padding-left: 6px;padding-right: 6px;font-size: 2.0em;font-weight:bold;" /><br>
+
+      <br>
+    </div>
+    <!--page2-->
+    <div class="page2_class1" id="page2_id1"
+      style="background:none;border:4px solid gray;border-radius: 50px;width: 350px;padding-top: 20px;padding-bottom: 40px;padding-left: 40px;padding-right: 40px;">
+      <center>
+        <br>
+        <h2>Hi <b id="displayusername" style="color:red;"></b>!</h2>
+        <div class="user"></div>
+        <h2> You are successfully logged In.!!!!</h2>
+        <br>
+    </div>
+  </center>
+</body>
+</html>
